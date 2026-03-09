@@ -152,16 +152,25 @@ type InfixExpression struct {
 	Right    Expression
 }
 
-func (ie *InfixExpression) expressionNode()      {}
-func (ie *InfixExpression) TokenLiteral() string { return ie.Token.Literal }
-func (ie *InfixExpression) String() string {
+func (b *InfixExpression) expressionNode()      {}
+func (b *InfixExpression) TokenLiteral() string { return b.Token.Literal }
+func (b *InfixExpression) String() string {
 	var out bytes.Buffer
 
 	out.WriteString("(")
-	out.WriteString(ie.Right.String())
-	out.WriteString(" " + ie.Operator + " ")
-	out.WriteString(ie.Right.String())
+	out.WriteString(b.Right.String())
+	out.WriteString(" " + b.Operator + " ")
+	out.WriteString(b.Right.String())
 	out.WriteString(")")
 
 	return out.String()
 }
+
+type Boolean struct {
+	Token token.Token
+	Value bool
+}
+
+func (b *Boolean) expressionNode()      {}
+func (b *Boolean) TokenLiteral() string { return b.Token.Literal }
+func (b *Boolean) String() string       { return b.Token.Literal }
